@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MailSender.lib.Data;
+using MailSender.lib.Entities;
+using MailSender.lib.Service;
+using MailSender.lib.Services;
 
 namespace TestWPF2
 {
@@ -23,6 +27,16 @@ namespace TestWPF2
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnSendButtonClick(object Sender, RoutedEventArgs E)
+        {
+            var recipient = RecipientsList.SelectedItem as Recipient;
+            var sender = SendersList.SelectedItem as Sender;
+            var server = ServersList.SelectedItem as Server;
+            if (recipient is null || sender is null || server is null) return;
+            var mail_sender = new MailSender.lib.Services.MailSender(server.Address,server.Port,server.UseSsl,server.Login,server.Password.Decode(3));
+            mail_sender.Send(MailHeader.Text,MailBody.Text, sender.Address,recipient.Address);
         }
     }
 }
