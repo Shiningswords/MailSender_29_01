@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
         xmlns:local="clr-namespace:MailSender"
@@ -25,7 +26,7 @@
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="K.V. Gudochkin"></TextBlock>
         </StatusBar>
-        <TabControl>
+        <TabControl Name="tabControl">
             <TabItem Header="Рассылка" ToolTip="Управление рассылкой">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -80,7 +81,7 @@
                             </Button>
                         </ToolBar>
                         <ToolBar>
-                            <Button>
+                            <Button Click="Button_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Перейти в планировщик"/>
                                     <fa:ImageAwesome Height="12" Icon="ClockOutline" Margin="4,0,0,0" Foreground="Blue"/>
@@ -100,13 +101,14 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Планировщик">
+            <TabItem Name="tabPlanner" Header="Планировщик">
                 <DockPanel>
                     <GroupBox Header="Управление">
                         <StackPanel>
                             <TextBlock Text="Календарь:"></TextBlock>
-                            <Calendar/>
+                            <Calendar Name="Calendar"/>
                             <StackPanel Margin="5">
+                                <wpftk:TimePicker Margin="3"></wpftk:TimePicker>
                                 <Button HorizontalContentAlignment="Stretch">
                                     <DockPanel Margin="20,0">
                                         <fa:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="ClockOutline" Margin="0,0,4,0" ></fa:ImageAwesome>

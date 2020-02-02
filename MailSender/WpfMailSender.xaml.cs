@@ -54,5 +54,10 @@ namespace MailSender
             sender.Name = dialog.NameValue;
             sender.Address = dialog.AddressValue;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl.SelectedItem = tabPlanner;
+        }
     }
 }
