@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender\MailSender.csproj", "{B1B95F1B-3AAB-44E3-B98C-7C8C89EF899C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8033B66C-C354-42B8-AB33-46020BB9F658} = {8033B66C-C354-42B8-AB33-46020BB9F658}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4ADE1766-3B03-4A10-BBA6-7A1FAC95D431}"
 EndProject
