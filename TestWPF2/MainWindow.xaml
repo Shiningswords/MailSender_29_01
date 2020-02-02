@@ -38,7 +38,7 @@
                             <Button ToolTip="Добавить" >
                                 <fa:ImageAwesome Icon="Plus" Height="12" Foreground="DarkBlue"/>
                             </Button>
-                            <Button ToolTip="Редактировать" >
+                            <Button Click="OnSenderEditClick" ToolTip="Редактировать" >
                                 <fa:ImageAwesome Icon="Edit" Height="12" Foreground="DarkMagenta"/>
                             </Button>
                             <Button ToolTip="Удалить" >
