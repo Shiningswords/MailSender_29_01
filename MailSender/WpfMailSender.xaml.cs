@@ -12,14 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net;
-using System.Net.Mail;
-using System.Security;
+using MailSender.lib.Data;
+using MailSender.lib.Entities;
+using MailSender.lib.Service;
+using MailSender.lib.Services;
 
 namespace MailSender
 {
     /// <summary>
-    /// Логика взаимодействия для WpfMailSender.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class WpfMailSender : Window
     {
@@ -27,10 +28,31 @@ namespace MailSender
         {
             InitializeComponent();
         }
-        private void OnSendButtonClick(object sender, RoutedEventArgs e)
+
+        private void OnSendButtonClick(object Sender, RoutedEventArgs E)
         {
-            EmailSendServiceClass.SendMail(MailInfo.from, MailInfo.to, Head.Text, Body.Text, 
-                MailInfo.server_address, MailInfo.server_port, UserNameEdit.Text, PasswordEdit.SecurePassword);
+            var recipient = RecipientsList.SelectedItem as Recipient;
+            var sender = SendersList.SelectedItem as Sender;
+            var server = ServersList.SelectedItem as Server;
+
+            if (recipient is null || server is null || sender is null) return;
+
+            var mail_sender = new MailSender.lib.Services.DebugMailSender(server.Address, server.Port, server.UseSsl, server.Login, server.Password.Decode(3));
+
+            mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Address, recipient.Address);
+        }
+
+        private void OnSenderEditClick(object Sender, RoutedEventArgs E)
+        {
+            var sender = SendersList.SelectedItem as Sender;
+            if (sender is null) return;
+
+            var dialog = new SenderEditor(sender, this);
+
+            if (dialog.ShowDialog() != true) return;
+
+            sender.Name = dialog.NameValue;
+            sender.Address = dialog.AddressValue;
         }
     }
 }
