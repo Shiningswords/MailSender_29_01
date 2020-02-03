@@ -48,7 +48,8 @@
                         </ToolBar>
                         <ToolBar Header="Сервера" Band="1" BandIndex="0">
                             <ComboBox Name="ServersList" Width="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
-                                <ComboBox.ItemTemplate>
+                               <ComboBox.ItemTemplate>
+                                    <!-- 
                                     <DataTemplate DataType="entities:Server">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}" FontWeight="Bold"></TextBlock>
@@ -56,6 +57,13 @@
                                             <TextBlock Opacity="0.6">:</TextBlock>
                                             <TextBlock Text="{Binding Port}" Opacity="0.6"></TextBlock>
                                         </StackPanel>
+                                    </DataTemplate>
+                                -->
+                                    <DataTemplate DataType="String">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Key}" FontWeight="Bold"></TextBlock>
+                                            <TextBlock Text="{Binding Value}" Opacity="0.6"></TextBlock>
+                                            </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -118,6 +126,7 @@
                                 <Button HorizontalContentAlignment="Stretch" Click="OnSendButtonClick">
                                     <DockPanel Margin="20,0">
                                         <fa:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="Send" Margin="0,0,4,0" ></fa:ImageAwesome>
+                                        <Image Source="Media/scheduler.png" DockPanel.Dock="Right" Height="12" Margin="4"></Image>
                                         <TextBlock  HorizontalAlignment="Center" Text="Отправить"></TextBlock>
                                     </DockPanel>
                                 </Button>

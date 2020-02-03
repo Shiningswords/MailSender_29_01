@@ -10,12 +10,14 @@ namespace MailSender.lib.Data
 {
     public static class TestData
     {
+        /*
         public static List<Server> Servers { get; } = new List<Server>
         {
             new Server{Name = "Яндекс", Address="smtp.yandex.ru", Port=587, Login="UserName", Password="Password".Encode(3)},
             new Server{Name = "Mail.ru", Address="smtp.mail.ru", Port=587, Login="UserName", Password="Password".Encode(3)},
             new Server{Name = "GMail", Address="smtp.gmail.com", Port=587, Login="UserName", Password="Password".Encode(3)}
         };
+        */
 
         public static List<Sender> Senders { get; } = new List<Sender>
         {
@@ -28,6 +30,16 @@ namespace MailSender.lib.Data
             new Recipient{Name = "Иванов", Address="ivanov@server.ru"},
             new Recipient{Name = "Петров", Address="petrov@server.ru"},
             new Recipient{Name = "Сидоров", Address="sidorov@server.ru"}
+        };
+        public static Dictionary<string, int> Servers
+        {
+            get { return dicServers; }
+        }
+        private static Dictionary<string, int> dicServers = new Dictionary<string, int>()
+        {
+            { "smtp.yandex.ru",587 },
+            { "smtp.mail.ru",587 },
+            { "smtp.gmail.com",587 }
         };
     }
 }
