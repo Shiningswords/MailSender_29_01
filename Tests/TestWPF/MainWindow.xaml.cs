@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Mail;
 using System.Security;
+using TestWPF.ViewModels;
 
 namespace TestWPF
 {
@@ -26,46 +27,8 @@ namespace TestWPF
         public MainWindow()
         {
             InitializeComponent();
+            //DataContext = new MainWindowViewModel();
         }
-        private void OnSendButtonClick(object sender, RoutedEventArgs e)
-        {
-            var message_subject = $"Тестовое сообщение от {DateTime.Now}";
-            var message_body = $"Тело сообщения - {DateTime.Now}";
-
-            const string from = "kgudochkin@yandex.ru";
-            const string to = "kvgudochkin@gmail.com";
-
-            try
-            {
-                using (var message = new MailMessage(from, to))
-                {
-                    message.Subject = message_subject;
-                    message.Body = message_body;
-
-
-                    const string server_address = "smtp.yandex.ru";
-                    const int server_port = 25; //25
-                    using (var client = new SmtpClient(server_address, server_port))
-                    {
-                        client.EnableSsl = true;
-
-                        var user_name = UserNameEdit.Text;
-                        //var user_password = PasswordEdit.Password;
-                        SecureString user_password = PasswordEdit.SecurePassword;
-
-                        client.Credentials = new NetworkCredential(user_name, user_password);
-
-                        client.Send(message);
-
-                        MessageBox.Show("Почта отправлена!", "Ура!!!",
-                            MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
+        
     }
 }
