@@ -17,14 +17,14 @@ using MailSender.lib.Entities;
 using MailSender.lib.Service;
 using MailSender.lib.Services;
 
-namespace MailSender
+namespace TestWPF2
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class WpfMailSender : Window
+    public partial class MainWindow : Window
     {
-        public WpfMailSender()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -53,11 +53,6 @@ namespace MailSender
 
             sender.Name = dialog.NameValue;
             sender.Address = dialog.AddressValue;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            tabControl.SelectedItem = tabPlanner;
         }
     }
 }
