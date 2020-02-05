@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
+
+namespace MailSender.ViewModel
+{
+    public class MainWindowViewModel: ViewModelBase
+    {
+        private string _Title = "Рассыльщик почты";
+        public string Title
+        {
+            get => _Title;
+            set => _Title = value;
+        }
+
+        public MainWindowViewModel()
+        {
+
+        }
+    }
+}
