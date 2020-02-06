@@ -16,6 +16,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
 using MailSender.lib.Services;
+using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.ViewModel
 {
@@ -45,8 +46,8 @@ namespace MailSender.ViewModel
             var services = SimpleIoc.Default;
 
             services.Register<MainWindowViewModel>();
-            services.Register<RecipientsManager>();
-            services.Register<RecipientsStoreInMemory>();
+            services.Register<IRecipientsManager,RecipientsManager>();
+            services.Register<IRecipientsStore, RecipientsStoreInMemory>();
         }
 
         public MainWindowViewModel MainWindowModel

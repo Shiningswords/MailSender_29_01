@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using MailSender.lib.Entities;
 using MailSender.lib.Data;
+using MailSender.lib.Services.Interfaces;
 
 namespace MailSender.lib.Services
 {
-    public class RecipientsStoreInMemory
+    public class RecipientsStoreInMemory: IRecipientsStore
     {
         
         public IEnumerable<Recipient> Get() => TestData.Recipients;
