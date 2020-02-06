@@ -15,6 +15,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using CommonServiceLocator;
+using MailSender.lib.Services;
 
 namespace MailSender.ViewModel
 {
@@ -41,8 +42,11 @@ namespace MailSender.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+            var services = SimpleIoc.Default;
 
-            SimpleIoc.Default.Register<MainWindowViewModel>();
+            services.Register<MainWindowViewModel>();
+            services.Register<RecipientsManager>();
+            services.Register<RecipientsStoreInMemory>();
         }
 
         public MainWindowViewModel MainWindowModel
