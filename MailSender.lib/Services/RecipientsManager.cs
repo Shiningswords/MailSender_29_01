@@ -22,8 +22,13 @@ namespace MailSender.lib.Services
         {
 
         }
+        public void Edit(Recipient Recipient)
+        {
+            _Store.Edit(Recipient.Id, Recipient);
+        }
+        public void SaveChanges() { }
 
-        //Edit
+        
         //Delete
     }
 }

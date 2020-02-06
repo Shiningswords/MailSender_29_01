@@ -12,5 +12,12 @@ namespace MailSender.lib.Services
     {
         
         public IEnumerable<Recipient> Get() => TestData.Recipients;
+        public void Edit(int id, Recipient recipient) {
+            //БД
+        }
+        public void SaveChanges()
+        { 
+            //БД
+        }
     }
 }
