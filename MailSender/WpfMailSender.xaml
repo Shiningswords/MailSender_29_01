@@ -7,6 +7,7 @@
         xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
+        xmlns:view="clr-namespace:MailSender.Views"
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
         Title="{Binding Title}" 
@@ -100,14 +101,7 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Получатели писем">
-                        <DataGrid Name="RecipientsList" ItemsSource="{Binding Recipients}" AutoGenerateColumns="False" IsReadOnly="True" 
-                                  VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID"/>
-                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
-                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <view:RecipientsView></view:RecipientsView>
                     </GroupBox>
                 </Grid>
             </TabItem>
