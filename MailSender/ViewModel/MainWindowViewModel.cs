@@ -32,5 +32,11 @@ namespace MailSender.ViewModel
             _RecipientsManager = RecipientsManager;
             _Recipients = new ObservableCollection<Recipient>(_RecipientsManager.GetAll());
         }
+        private Recipient _SelectedRecipient;
+        public Recipient SelectedRecipient
+        {
+            get => _SelectedRecipient;
+            set => Set(ref _SelectedRecipient, value);
+        }
     }
 }
