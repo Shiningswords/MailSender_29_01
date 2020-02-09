@@ -122,6 +122,7 @@
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ValidationRules\RegExValidation.cs" />
     <Compile Include="SenderEditor.xaml.cs">
       <DependentUpon>SenderEditor.xaml</DependentUpon>
     </Compile>

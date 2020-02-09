@@ -8,7 +8,7 @@
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
         xmlns:view="clr-namespace:MailSender.Views"
-        xmlns:local="clr-namespace:MailSender"
+        xmlns:local="clr-namespace:MailSender" 
         mc:Ignorable="d"
         Title="{Binding Title}" 
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
@@ -52,7 +52,7 @@
                         <ToolBar Header="Сервера" Band="1" BandIndex="0">
                             <ComboBox Name="ServersList" Width="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
                                <ComboBox.ItemTemplate>
-                                    <!-- 
+
                                     <DataTemplate DataType="entities:Server">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}" FontWeight="Bold"></TextBlock>
@@ -60,13 +60,6 @@
                                             <TextBlock Opacity="0.6">:</TextBlock>
                                             <TextBlock Text="{Binding Port}" Opacity="0.6"></TextBlock>
                                         </StackPanel>
-                                    </DataTemplate>
-                                -->
-                                    <DataTemplate DataType="String">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Key}" FontWeight="Bold"></TextBlock>
-                                            <TextBlock Text="{Binding Value}" Opacity="0.6"></TextBlock>
-                                            </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
