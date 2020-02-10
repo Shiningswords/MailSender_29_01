@@ -113,7 +113,10 @@
                             <TextBlock Text="Календарь:"></TextBlock>
                             <Calendar Name="Calendar"/>
                             <StackPanel Margin="5">
-                                <wpftk:TimePicker Margin="3"></wpftk:TimePicker>
+                                <!--<wpftk:TimePicker Margin="3"></wpftk:TimePicker>-->
+                                <view:MultiSend>
+                                    
+                                </view:MultiSend>
                                 <Button HorizontalContentAlignment="Stretch">
                                     <DockPanel Margin="20,0">
                                         <fa:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="ClockOutline" Margin="0,0,4,0" ></fa:ImageAwesome>
