@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWPF2", "TestWPF2\TestWP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.lib", "MailSender.lib\MailSender.lib.csproj", "{8033B66C-C354-42B8-AB33-46020BB9F658}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.lib.Tests", "Tests\MailSender.lib.Tests\MailSender.lib.Tests.csproj", "{10DC7C28-C512-4E63-8743-0CF19E7B73D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{8033B66C-C354-42B8-AB33-46020BB9F658}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8033B66C-C354-42B8-AB33-46020BB9F658}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8033B66C-C354-42B8-AB33-46020BB9F658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10DC7C28-C512-4E63-8743-0CF19E7B73D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10DC7C28-C512-4E63-8743-0CF19E7B73D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10DC7C28-C512-4E63-8743-0CF19E7B73D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10DC7C28-C512-4E63-8743-0CF19E7B73D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{AF150310-04DD-4161-867B-19DD0A7E872F} = {4ADE1766-3B03-4A10-BBA6-7A1FAC95D431}
 		{8FA444DA-FC26-4418-AE48-428151A45142} = {4ADE1766-3B03-4A10-BBA6-7A1FAC95D431}
 		{E5D641C8-0F22-4410-86FF-19C1F0B1B78C} = {4ADE1766-3B03-4A10-BBA6-7A1FAC95D431}
+		{10DC7C28-C512-4E63-8743-0CF19E7B73D0} = {4ADE1766-3B03-4A10-BBA6-7A1FAC95D431}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C6207EB6-40B3-498B-92AA-62455D7061D5}

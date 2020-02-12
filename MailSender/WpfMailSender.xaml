@@ -7,9 +7,12 @@
         xmlns:wpftk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:data="clr-namespace:MailSender.lib.Data;assembly=MailSender.lib"
         xmlns:entities="clr-namespace:MailSender.lib.Entities;assembly=MailSender.lib"
-        xmlns:local="clr-namespace:MailSender"
+        xmlns:view="clr-namespace:MailSender.Views"
+        xmlns:local="clr-namespace:MailSender" 
         mc:Ignorable="d"
-        Title="WpfMailSender" Height="450" Width="800">
+        Title="{Binding Title}" 
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
+        Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -49,7 +52,7 @@
                         <ToolBar Header="Сервера" Band="1" BandIndex="0">
                             <ComboBox Name="ServersList" Width="150" ItemsSource="{x:Static data:TestData.Servers}" SelectedIndex="0">
                                <ComboBox.ItemTemplate>
-                                    <!-- 
+
                                     <DataTemplate DataType="entities:Server">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Name}" FontWeight="Bold"></TextBlock>
@@ -57,13 +60,6 @@
                                             <TextBlock Opacity="0.6">:</TextBlock>
                                             <TextBlock Text="{Binding Port}" Opacity="0.6"></TextBlock>
                                         </StackPanel>
-                                    </DataTemplate>
-                                -->
-                                    <DataTemplate DataType="String">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Key}" FontWeight="Bold"></TextBlock>
-                                            <TextBlock Text="{Binding Value}" Opacity="0.6"></TextBlock>
-                                            </StackPanel>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
@@ -98,14 +94,15 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Получатели писем">
-                        <DataGrid Name="RecipientsList" ItemsSource="{x:Static data:TestData.Recipients}" AutoGenerateColumns="False" IsReadOnly="True" 
-                                  VerticalGridLinesBrush="Gray" GridLinesVisibility="Vertical" AlternatingRowBackground="LightGray">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID"/>
-                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
-                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <view:RecipientsView Grid.Column="0" ></view:RecipientsView>
+                            <view:RecipientEditor Grid.Column="1" ></view:RecipientEditor>
+                        </Grid>
+                        
                     </GroupBox>
                 </Grid>
             </TabItem>
@@ -116,7 +113,10 @@
                             <TextBlock Text="Календарь:"></TextBlock>
                             <Calendar Name="Calendar"/>
                             <StackPanel Margin="5">
-                                <wpftk:TimePicker Margin="3"></wpftk:TimePicker>
+                                <!--<wpftk:TimePicker Margin="3"></wpftk:TimePicker>-->
+                                <view:MultiSend>
+                                    
+                                </view:MultiSend>
                                 <Button HorizontalContentAlignment="Stretch">
                                     <DockPanel Margin="20,0">
                                         <fa:ImageAwesome DockPanel.Dock="Right" Height="12" Icon="ClockOutline" Margin="0,0,4,0" ></fa:ImageAwesome>

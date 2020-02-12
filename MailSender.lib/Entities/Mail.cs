@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MailSender.lib.Entities
 {
-    public class Sender: PersonEntity
+    public class Mail: BaseEntity
     {
-        
+        public string Subject { get; set; }
+        public string Body { get; set; }
     }
 }
