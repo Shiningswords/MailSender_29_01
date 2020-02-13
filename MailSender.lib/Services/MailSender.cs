@@ -6,59 +6,41 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 using System.Diagnostics;
+using System.Threading;
+using MailSender.lib.Entities;
 
 namespace MailSender.lib.Services
 {
     public class MailSender
     {
-        private readonly string _ServerAddress;
-        private readonly int _Port;
-        private bool _UseSsl;
-        private string _Login;
-        private string _Password;
-        public MailSender(string ServerAddress, int Port, bool UseSsl, string Login, string Password)
-        {
-            _ServerAddress = ServerAddress;
-            _Port = Port;
-            _UseSsl = UseSsl;
-            _Login = Login;
-            _Password = Password;
+        private readonly Server _Server;
 
-        }
-        public void Send(string Subject, string Body, string From, string To)
+        public MailSender(Server Server) => _Server = Server;
+
+        public void Send(Mail Mail, Sender From, Recipient To)
         {
-            using(var message = new MailMessage(From, To))
+            using (var message = new MailMessage(new MailAddress(From.Address, From.Name), new MailAddress(To.Address, To.Name)))
             {
-                message.Subject = Subject;
-                message.Body = Body;
-                var login = new NetworkCredential(_Login, _Password);
-                using (var client = new SmtpClient(_ServerAddress, _Port) { EnableSsl = _UseSsl, Credentials = login })
-                {
-                    client.Send(message);
-                }
+                message.Subject = Mail.Subject;
+                message.Body = Mail.Body;
 
+                var login = new NetworkCredential(_Server.Login, _Server.Password);
+                using (var client = new SmtpClient(_Server.Address, _Server.Port) { EnableSsl = _Server.UseSsl, Credentials = login })
+                    client.Send(message);
             }
         }
-    }
-    public class DebugMailSender
-    {
-        private readonly string _ServerAddress;
-        private readonly int _Port;
-        private bool _UseSsl;
-        private string _Login;
-        private string _Password;
-        public DebugMailSender(string ServerAddress, int Port, bool UseSsl, string Login, string Password)
-        {
-            _ServerAddress = ServerAddress;
-            _Port = Port;
-            _UseSsl = UseSsl;
-            _Login = Login;
-            _Password = Password;
 
-        }
-        public void Send(string Subject, string Body, string From, string To)
+        public void Send(Mail Message, Sender From, IEnumerable<Recipient> To)
         {
-            Debug.WriteLine($"Отправка почты от {From} к {To} через {_ServerAddress}:{_Port}[Использвание SSL:{_UseSsl}] \r\n{Subject}:{Body}");
+            foreach (var recipient in To)
+                Send(Message, From, recipient);
+        }
+
+        public void SendParallel(Mail Message, Sender From, IEnumerable<Recipient> To)
+        {
+            foreach (var recipient in To)
+                ThreadPool.QueueUserWorkItem(_ => Send(Message, From, recipient));
         }
     }
+}
 }
