@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Diagnostics;
 
 namespace TPL_TAP
 {
@@ -57,12 +58,36 @@ namespace TPL_TAP
             //Parallel.ForEach(messages, ParallelInvokeMethod);
             //Parallel.ForEach(messages, s => ParallelInvokeMethod(s));
 
-            var foreach_result = Parallel.ForEach(messages, (s, state) =>
-            {
-                if (s.EndsWith("20")) state.Break();
-                ParallelInvokeMethod(s);
-            });
-            Console.WriteLine("Выполнилось {0} итераций", foreach_result.LowestBreakIteration);
+            //var foreach_result = Parallel.ForEach(messages, (s, state) =>
+            //{
+            //    if (s.EndsWith("20")) state.Break();
+            //    ParallelInvokeMethod(s);
+            //});
+            //Console.WriteLine("Выполнилось {0} итераций", foreach_result.LowestBreakIteration);
+
+            var cancellation = new CancellationTokenSource(millisecondsDelay: 3000);
+            var long_creating_messages = messages
+               .AsParallel()
+               .WithDegreeOfParallelism(degreeOfParallelism: 3)
+               .WithMergeOptions(ParallelMergeOptions.FullyBuffered)
+               .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+               .WithCancellation(cancellation.Token)
+               .Select(m =>
+               {
+                   Console.WriteLine("Запрос сообщения {0}", m);
+                   Thread.Sleep(250);
+                   Console.WriteLine("Сообщение {0} сформировано", m);
+                   return m;
+               });
+
+            var timer = Stopwatch.StartNew();
+            var selected_messages = long_creating_messages
+               .Select(m => (msg: m, length: m.Length))
+               .AsSequential()
+               .Where(m => m.msg.EndsWith("20"))
+               .ToArray();
+            timer.Stop();
+            Console.WriteLine("Данные обработаны за {0}c", timer.Elapsed.TotalSeconds);
 
             Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
