@@ -50,7 +50,19 @@ namespace TPL_TAP
             //    if (i > 15) state.Break();
             //    ParallelInvokeMethod($"Message {i}");
             //});
+            //Console.WriteLine("Выполнилось {0} итераций", for_reslut.LowestBreakIteration);
 
+            var messages = Enumerable.Range(1, 300).Select(i => $"Message {i}");//.ToArray();
+
+            //Parallel.ForEach(messages, ParallelInvokeMethod);
+            //Parallel.ForEach(messages, s => ParallelInvokeMethod(s));
+
+            var foreach_result = Parallel.ForEach(messages, (s, state) =>
+            {
+                if (s.EndsWith("20")) state.Break();
+                ParallelInvokeMethod(s);
+            });
+            Console.WriteLine("Выполнилось {0} итераций", foreach_result.LowestBreakIteration);
 
             Console.WriteLine("Главный поток завершился");
             Console.ReadLine();
