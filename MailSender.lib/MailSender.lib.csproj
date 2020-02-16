@@ -67,6 +67,7 @@
     <Compile Include="Services\Interfaces\IMailsStore.cs" />
     <Compile Include="Services\Interfaces\IRecipientsManager.cs" />
     <Compile Include="Services\Interfaces\IRecipientsStore.cs" />
+    <Compile Include="Services\MailSchedulerTPL.cs" />
     <Compile Include="Services\MailSender.cs" />
     <Compile Include="Services\RecipientsManager.cs" />
     <Compile Include="Services\InMemory\RecipientsStoreInMemory.cs" />
