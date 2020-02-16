@@ -37,9 +37,9 @@ namespace TestWPF2
 
             if (recipient is null || server is null || sender is null) return;
 
-            var mail_sender = new MailSender.lib.Services.DebugMailSender(server.Address, server.Port, server.UseSsl, server.Login, server.Password.Decode(3));
+            //var mail_sender = new MailSender.lib.Services.DebugMailSender(server.Address, server.Port, server.UseSsl, server.Login, server.Password.Decode(3));
 
-            mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Address, recipient.Address);
+            //mail_sender.Send(MailHeader.Text, MailBody.Text, sender.Address, recipient.Address);
         }
 
         private void OnSenderEditClick(object Sender, RoutedEventArgs E)
