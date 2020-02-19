@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="TestDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="TestDBTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TestDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TestDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SongSet" EntityType="TestDB.Song" />
+          <EntitySet Name="ArtistSet" EntityType="TestDB.Artist" />
+          <AssociationSet Name="ArtistSong" Association="TestDB.ArtistSong">
+            <End Role="Artist" EntitySet="ArtistSet" />
+            <End Role="Song" EntitySet="SongSet" />
+          </AssociationSet>
+          <EntitySet Name="DistributorSet" EntityType="TestDB.Distributor" />
+          <AssociationSet Name="DistributorArtist" Association="TestDB.DistributorArtist">
+            <End Role="Distributor" EntitySet="DistributorSet" />
+            <End Role="Artist" EntitySet="ArtistSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="true" Unicode="true" />
+          <NavigationProperty Name="Artist" Relationship="TestDB.ArtistSong" FromRole="Song" ToRole="Artist" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Song" Relationship="TestDB.ArtistSong" FromRole="Artist" ToRole="Song" />
+          <NavigationProperty Name="Distributor" Relationship="TestDB.DistributorArtist" FromRole="Artist" ToRole="Distributor" />
+        </EntityType>
+        <Association Name="ArtistSong">
+          <End Type="TestDB.Artist" Role="Artist" Multiplicity="1" />
+          <End Type="TestDB.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Distributor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" Unicode="true" />
+          <NavigationProperty Name="Artist" Relationship="TestDB.DistributorArtist" FromRole="Distributor" ToRole="Artist" />
+        </EntityType>
+        <Association Name="DistributorArtist">
+          <End Type="TestDB.Distributor" Role="Distributor" Multiplicity="*" />
+          <End Type="TestDB.Artist" Role="Artist" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="TestDB" />
+        <Alias Key="Target" Value="TestDB.Store" />
+        <EntityContainerMapping CdmEntityContainer="TestDBContainer" StorageEntityContainer="TestDBTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
